@@ -25,7 +25,7 @@ jobs:
           command: |
             cd rust/cubestore && build-and-push  \
             --image cubestore-base \
-            --file ./packages/cubejs-docker/dev.Dockerfile
+            --file Dockerfile
   build_and_push_cubejs:
     environment:
       DOCKER_BUILDKIT: 1
@@ -42,7 +42,7 @@ jobs:
           command: |
             build-and-push  \
             --image cube-base \
-            --file cubejs-docker/packages/dev.Dockerfile
+            --file ./packages/cubejs-docker/dev.Dockerfile
 
 
 workflows:
