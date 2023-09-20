@@ -38,11 +38,28 @@ jobs:
           version: 20.10.6
           docker_layer_caching: true
       - run:
-          name: build docker image
+          name: setup rust
+          command: |
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+            export PATH="$HOME/.cargo/bin:$PATH"
+            rustup default nightly
+      - run:
+          name: build cubesql
+          command: |
+            source "$HOME/.cargo/env"
+            cd rust/cubesql && cargo build
+      - run:
+          name: build dev docker image
+          command: |
+            docker build -t cubejs/cube:build \
+              -f ./packages/cubejs-docker/dev.Dockerfile .
+      - run:
+          name: build local artifacts docker image
           command: |
             build-and-push  \
             --image cube-base \
-            --file ./packages/cubejs-docker/dev.Dockerfile
+            --file ./packages/cubejs-docker/local.Dockerfile \
+            --build-dir ./packages/cubejs-docker/
 
 
 workflows:
