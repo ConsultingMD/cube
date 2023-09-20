@@ -38,15 +38,15 @@ jobs:
           version: 20.10.6
           docker_layer_caching: true
       - run:
-        name: setup rust
-        command: |
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-          export PATH="$HOME/.cargo/bin:$PATH"
-          rustup default nightly
+          name: setup rust
+          command: |
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+            export PATH="$HOME/.cargo/bin:$PATH"
+            rustup default nightly
       - run:
-        name: build cubesql
-        command: |
-          cd rust/cubesql/src && cargo build
+          name: build cubesql
+          command: |
+            cd rust/cubesql/src && cargo build
       - run:
           name: build dev docker image
           command: |
