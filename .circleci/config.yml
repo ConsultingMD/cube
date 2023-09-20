@@ -46,7 +46,7 @@ jobs:
       - run:
           name: build cubesql
           command: |
-            cd rust/cubesql/src && cargo build
+            cd rust/cubesql && cargo build
       - run:
           name: build dev docker image
           command: |
